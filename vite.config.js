@@ -11,7 +11,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
-        marca: resolve(import.meta.dirname, 'marca/index.html'),
+        ayuda: resolve(import.meta.dirname, 'ayuda/index.html'),
         notFound: resolve(import.meta.dirname, '404.html'),
       },
     },

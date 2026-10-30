@@ -1,6 +1,10 @@
 // Página de render: ?scene=inkify-machine&rx=0.2&ry=-0.5&shadow=1&explode=0
 // El script de render llama a window.frame(t) para cada cuadro y captura el canvas.
-import { adaptToDarkBackground, createStage, SCENES } from '../src/three/zelunko3d.js';
+import { adaptToDarkBackground, createStage, SCENES as BASE } from '../src/three/zelunko3d.js';
+import { INKIFY_SCENES } from '../src/three/inkify3d.js';
+import { RENTAFACIL_SCENES } from '../src/three/rentafacil3d.js';
+
+const SCENES = { ...BASE, ...INKIFY_SCENES, ...RENTAFACIL_SCENES };
 
 const q = new URLSearchParams(location.search);
 const num = (k, d) => (q.has(k) ? Number(q.get(k)) : d);

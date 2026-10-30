@@ -8,7 +8,7 @@ sin ejecutar JavaScript.
 | Ruta | Qué es |
 | --- | --- |
 | `index.html` | Landing: héroe 3D, qué es Zelunko, productos, servicios, proceso, principios, FAQ y contacto |
-| `marca/index.html` | Identidad de marca: logos descargables, color, tipografía, arquitectura de marca y voz |
+| `ayuda/index.html` + `src/ayuda.js` | Centro de ayuda para usuarios de Inkify y RentaFácil: accesos directos, verificador de certificados, preguntas con buscador y soporte por correo (`/marca/` redirige aquí) |
 | `404.html` | Página no encontrada |
 | `public/` | `robots.txt` (abre el sitio a buscadores y bots de IA), `sitemap.xml`, `llms.txt`, `llms-full.txt`, íconos, `og.png`, `.well-known/security.txt` y `brand/` (logos SVG) |
 | `docs/` | `identidad-institucional.md`, `benchmark.md`, `seo-geo-checklist.md` y el logo original |

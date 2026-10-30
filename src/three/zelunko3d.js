@@ -1,4 +1,5 @@
-// Lenguaje 3D común de Zelunko, Inkify y RentaFácil: cada logo convertido en un objeto físico
+// Lenguaje 3D común de Zelunko, Inkify y RentaFácil (modelos de cada producto en inkify3d.js y
+// rentafacil3d.js): cada logo convertido en un objeto físico
 // (cromo, vidrio esmerilado, satinado) bajo la misma luz de estudio. Lo usan los héroes en vivo
 // de las tres webs y el estudio que pre-renderiza imágenes y videos para las apps.
 // Ver docs/sistema-de-diseno.md § 3D.
@@ -60,7 +61,7 @@ export const materials = {
 // ---------- Utilidades de geometría ----------
 
 /** Tubo con extremos y esquinas redondeadas a lo largo de una polilínea (coordenadas SVG 0–100). */
-function strokeTube(points, radius, material) {
+export function strokeTube(points, radius, material) {
   const group = new Group();
   const v = points.map(([x, y]) => new Vector3(x, -y, 0));
   for (let i = 0; i < v.length - 1; i++) {
@@ -75,7 +76,7 @@ function strokeTube(points, radius, material) {
   return group;
 }
 
-function extrudeSvgPath(d, depth, bevel = 4) {
+export function extrudeSvgPath(d, depth, bevel = 4) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg"><path d="${d}"/></svg>`;
   const shapes = new SVGLoader().parse(svg).paths.flatMap((p) => SVGLoader.createShapes(p));
   const geometry = new ExtrudeGeometry(shapes, {
@@ -92,7 +93,7 @@ function extrudeSvgPath(d, depth, bevel = 4) {
 }
 
 /** Centra un grupo en el origen y lo escala para que su lado mayor mida `size`. */
-function fit(group, size) {
+export function fit(group, size) {
   group.updateMatrixWorld(true);
   const box = new Box3().setFromObject(group);
   const center = box.min.clone().add(box.max).multiplyScalar(0.5);
@@ -210,65 +211,6 @@ export function paymentCubes(color = '#45D99A', count = 5) {
   return g;
 }
 
-// ---------- Inkify ----------
-
-/** La máquina del logo de Inkify: marco y aguja de cromo, bobina satinada y grip de vidrio naranja. */
-export function inkifyMachine() {
-  const inner = new Group();
-  const chrome = materials.chrome();
-  // Marco: rectángulo redondeado como en el logo.
-  inner.add(strokeTube([[22, 20], [22, 46], [50, 46], [50, 26]], 4.4, chrome));
-  inner.add(strokeTube([[22, 20], [40, 20]], 4.4, chrome));
-  // Bobina: el círculo de la esquina superior derecha.
-  const coil = new Mesh(new TorusGeometry(6.4, 3.6, 32, 96), materials.satin('#2A2A2E', 0.6));
-  coil.position.set(52, -16, 0);
-  inner.add(coil);
-  // Grip de vidrio naranja con tinta dentro.
-  const grip = new Mesh(new CylinderGeometry(7.6, 6.2, 32, 64, 1), materials.glass('#F97316', { frost: 0.18, thickness: 14 }));
-  grip.position.set(36, -64, 0);
-  const capTop = new Mesh(new SphereGeometry(7.6, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2), grip.material);
-  capTop.position.set(36, -48, 0);
-  inner.add(grip, capTop);
-  // Aguja.
-  const needle = new Mesh(new CylinderGeometry(1, 3, 16, 32), chrome);
-  needle.position.set(36, -88, 0);
-  inner.add(needle);
-  inner.add(strokeTube([[36, 46], [36, 48]], 4.4, chrome));
-  return fit(inner, 2);
-}
-
-/** Gota de tinta en vidrio naranja. */
-export function inkDrop(color = '#FF8A3D') {
-  const pts = [];
-  for (let i = 0; i <= 96; i++) {
-    const th = (i / 96) * Math.PI;
-    pts.push(new Vector2(Math.max(0.0001, Math.sin(th) * Math.sin(th / 2) ** 1.4 * 0.78), Math.cos(th) * 1.05));
-  }
-  const m = materials.glass(color, { frost: 0.06, thickness: 1.2 });
-  m.attenuationDistance = 6;
-  return new Mesh(new LatheGeometry(pts, 128), m);
-}
-
-/** Cartuchos de agujas: cuerpo de vidrio claro con núcleo de tinta. */
-export function inkCartridges(count = 4) {
-  const g = new Group();
-  const body = materials.glass('#FDBA8C', { frost: 0.22, thickness: 0.3 });
-  const ink = materials.satin('#F97316', 0.2);
-  const tip = materials.chrome();
-  for (let i = 0; i < count; i++) {
-    const c = new Group();
-    c.add(new Mesh(new CylinderGeometry(0.11, 0.11, 0.9, 48), body));
-    const core = new Mesh(new CylinderGeometry(0.045, 0.045, 0.82, 24), ink);
-    const point = new Mesh(new CylinderGeometry(0.008, 0.05, 0.22, 24), tip);
-    point.position.y = -0.56;
-    c.add(core, point);
-    c.position.set(-0.75 + i * 0.5, (i % 2) * 0.25 - 0.1, (i % 3) * 0.2 - 0.2);
-    c.rotation.set(0.25, 0, -0.5 + i * 0.25);
-    g.add(c);
-  }
-  return g;
-}
-
 /**
  * Fondo de marca: piezas de vidrio y satinado repartidas a lo ancho y en profundidad, con
  * hueco al centro para el texto. Pensado para banners anchos (CTA, encabezados de app).
@@ -331,12 +273,8 @@ export const SCENES = {
   'rentafacil-house': rentaFacilHouse,
   'rentafacil-seal': rentaFacilSeal,
   'rentafacil-cubes': () => paymentCubes('#45D99A'),
-  'inkify-machine': inkifyMachine,
-  'inkify-drop': () => inkDrop(),
-  'inkify-cartridges': inkCartridges,
   'zelunko-field': () => glassField(['#03DAC0', '#E6ECF4', '#9FB6E0']),
   'rentafacil-field': () => glassField(['#45D99A', '#0B5C58', '#BFEBDB']),
-  'inkify-field': () => glassField(['#F97316', '#2A2A2E', '#FFD8BD']),
 };
 
 /**

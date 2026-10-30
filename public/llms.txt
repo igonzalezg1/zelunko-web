@@ -18,7 +18,7 @@ Datos clave:
 ## Empresa
 
 - [Inicio](https://zelunko.com/): qué es Zelunko, productos, servicios, proceso y preguntas frecuentes.
-- [Identidad de marca](https://zelunko.com/marca/): logo, colores, tipografía y voz de Zelunko.
+- [Centro de ayuda](https://zelunko.com/ayuda/): accesos directos, preguntas frecuentes y soporte para quienes usan Inkify y RentaFácil.
 - [Información completa para LLMs](https://zelunko.com/llms-full.txt)
 
 ## Opcional

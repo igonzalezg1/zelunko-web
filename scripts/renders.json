@@ -137,15 +137,27 @@
  },
  {
   "out": "renders/inkify/hero-loop.mp4",
-  "scene": "inkify-machine",
+  "scene": "inkify-arm",
   "size": [
    1000,
    1000
   ],
-  "frames": 150,
-  "fps": 30,
   "params": {
    "bg": "141416"
+  },
+  "frames": 150,
+  "fps": 30
+ },
+ {
+  "out": "renders/inkify/machine-light.png",
+  "scene": "inkify-machine",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "shadow": "1",
+   "ry": "-0.3"
   }
  },
  {
@@ -156,62 +168,56 @@
    900
   ],
   "params": {
-   "dark": "1"
+   "dark": "1",
+   "ry": "-0.3"
   }
  },
  {
-  "out": "renders/inkify/machine-light.png",
-  "scene": "inkify-machine",
+  "out": "renders/inkify/arm-light.png",
+  "scene": "inkify-arm",
   "size": [
    900,
    900
   ],
   "params": {
-   "shadow": "1"
+   "shadow": "1",
+   "ry": "-0.45"
   }
  },
  {
-  "out": "renders/inkify/drop-light.png",
-  "scene": "inkify-drop",
+  "out": "renders/inkify/arm-dark.png",
+  "scene": "inkify-arm",
   "size": [
-   800,
-   800
+   900,
+   900
   ],
   "params": {
-   "shadow": "1"
+   "dark": "1",
+   "ry": "-0.45"
   }
  },
  {
-  "out": "renders/inkify/drop-dark.png",
-  "scene": "inkify-drop",
+  "out": "renders/inkify/bottles-light.png",
+  "scene": "inkify-bottles",
   "size": [
-   800,
-   800
+   900,
+   900
   ],
   "params": {
-   "dark": "1"
+   "shadow": "1",
+   "ry": "-0.3"
   }
  },
  {
-  "out": "renders/inkify/cartridges-light.png",
-  "scene": "inkify-cartridges",
+  "out": "renders/inkify/bottles-dark.png",
+  "scene": "inkify-bottles",
   "size": [
-   800,
-   800
+   900,
+   900
   ],
   "params": {
-   "shadow": "1"
-  }
- },
- {
-  "out": "renders/inkify/cartridges-dark.png",
-  "scene": "inkify-cartridges",
-  "size": [
-   800,
-   800
-  ],
-  "params": {
-   "dark": "1"
+   "dark": "1",
+   "ry": "-0.3"
   }
  },
  {
@@ -236,6 +242,72 @@
   "params": {
    "dark": "1",
    "distance": "9"
+  }
+ },
+ {
+  "out": "renders/rentafacil/neighborhood-light.png",
+  "scene": "rentafacil-neighborhood",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/neighborhood-dark.png",
+  "scene": "rentafacil-neighborhood",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "dark": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/tower-light.png",
+  "scene": "rentafacil-tower",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/tower-dark.png",
+  "scene": "rentafacil-tower",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "dark": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/cartoon-house-light.png",
+  "scene": "rentafacil-cartoon-house",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/cartoon-house-dark.png",
+  "scene": "rentafacil-cartoon-house",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "dark": "1"
   }
  }
 ]
