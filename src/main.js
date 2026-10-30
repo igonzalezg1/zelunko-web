@@ -1,7 +1,6 @@
 import './style.css';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 document.documentElement.classList.add('js');
 
 // Barra de navegación: sólida al bajar y menú móvil.
@@ -32,7 +31,8 @@ if (reducedMotion || !('IntersectionObserver' in window)) {
   revealables.forEach((el) => el.classList.add('is-visible'));
 } else {
   document.querySelectorAll('[data-stagger]').forEach((group) => {
-    group.querySelectorAll(':scope > [data-reveal]').forEach((el, i) => el.style.setProperty('--delay', `${i * 90}ms`));
+    // Escalonado de 50 ms, tope de 6: lo demás entra junto para no hacer esperar.
+    group.querySelectorAll(':scope > [data-reveal]').forEach((el, i) => el.style.setProperty('--delay', `${Math.min(i, 5) * 50}ms`));
   });
   const io = new IntersectionObserver(
     (entries) => {
@@ -42,7 +42,7 @@ if (reducedMotion || !('IntersectionObserver' in window)) {
         io.unobserve(entry.target);
       }
     },
-    { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+    { rootMargin: '0px 0px -6% 0px', threshold: 0.1 },
   );
   revealables.forEach((el) => io.observe(el));
 }
@@ -55,7 +55,7 @@ const runCounter = (el) => {
   if (reducedMotion) return (el.textContent = target + suffix);
   const start = performance.now();
   const step = (now) => {
-    const p = Math.min((now - start) / 1400, 1);
+    const p = Math.min((now - start) / 1200, 1);
     el.textContent = Math.round(target * (1 - Math.pow(1 - p, 4))) + suffix;
     if (p < 1) requestAnimationFrame(step);
   };
@@ -69,27 +69,6 @@ const counterIo = new IntersectionObserver((entries) => {
   }
 });
 counters.forEach((el) => counterIo.observe(el));
-
-// Brillo que sigue al cursor e inclinación 3D en tarjetas.
-if (finePointer && !reducedMotion) {
-  document.querySelectorAll('[data-spotlight]').forEach((card) => {
-    card.addEventListener('pointermove', (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
-  });
-  document.querySelectorAll('[data-tilt]').forEach((card) => {
-    const max = Number(card.dataset.tilt) || 6;
-    card.addEventListener('pointermove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `perspective(1100px) rotateX(${(-y * max).toFixed(2)}deg) rotateY(${(x * max).toFixed(2)}deg)`;
-    });
-    card.addEventListener('pointerleave', () => (card.style.transform = ''));
-  });
-}
 
 // Año del pie de página.
 document.querySelectorAll('[data-year]').forEach((el) => (el.textContent = String(new Date().getFullYear())));

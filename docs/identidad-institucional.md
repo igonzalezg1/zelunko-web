@@ -42,20 +42,19 @@ mint) y Zelunko los respalda con:
 | `slate` | `#5B6B82` | Texto secundario |
 | `mist` | `#F5F8FC` | Fondo claro |
 
-Gradiente institucional: `linear-gradient(135deg, #0E2C63 0%, #1D4590 45%, #03DAC0 100%)`,
-solo para héroes, bordes destacados y el sello 3D. Regla 60/30/10: marino/neutros/aqua.
+Sin degradados llamativos: el héroe usa noche → `#0A1C3F` en vertical, nada más. Regla 60/30/10: marino/neutros/aqua.
 
 ## Tipografía
 
-- **Outfit** (titulares, 600–800, tracking −0.02em): geométrica y redonda como el wordmark.
-- **Inter** (texto, 400–600). Base 16–18 px, interlineado 1.6.
+- **Plus Jakarta Sans** para todo (titulares 700–800 con tracking −0.02em, texto 400–600),
+  la misma familia en Zelunko, Inkify y RentaFácil, web y apps. Base 16–18 px, interlineado 1.6.
+- El wordmark del logo está dibujado con Outfit y ya va convertido a trazos en los SVG.
 
 ## Movimiento
 
 - Curva base `cubic-bezier(0.16, 1, 0.3, 1)` (*ease-out-expo*), 500–800 ms para entradas,
   150–250 ms para hover.
-- Patrones: aparición al hacer scroll (fade + 24 px hacia arriba, escalonado 80 ms),
-  inclinación 3D sutil en tarjetas, brillo que sigue al cursor, contadores, marquee.
+- Patrones y medidas exactas en `sistema-de-diseno.md` (sección Movimiento).
 - Siempre respetar `prefers-reduced-motion: reduce` (sin animaciones, contenido visible).
 
 ## Voz

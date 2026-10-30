@@ -3,9 +3,6 @@
 // para no frenar la página; sin WebGL o con movimiento reducido se queda el póster estático.
 import {
   ACESFilmicToneMapping,
-  AdditiveBlending,
-  BufferAttribute,
-  BufferGeometry,
   Color,
   ExtrudeGeometry,
   Group,
@@ -13,8 +10,6 @@ import {
   MeshPhysicalMaterial,
   PerspectiveCamera,
   PMREMGenerator,
-  Points,
-  PointsMaterial,
   Scene,
   SRGBColorSpace,
   WebGLRenderer,
@@ -46,31 +41,6 @@ function piece(d, material) {
   return new Mesh(geometry, material);
 }
 
-function dust(count) {
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < count; i++) {
-    const r = 260 + Math.random() * 520;
-    const a = Math.random() * Math.PI * 2;
-    positions[i * 3] = Math.cos(a) * r;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 560;
-    positions[i * 3 + 2] = Math.sin(a) * r - 200;
-  }
-  const geometry = new BufferGeometry();
-  geometry.setAttribute('position', new BufferAttribute(positions, 3));
-  return new Points(
-    geometry,
-    new PointsMaterial({
-      color: 0x5ff0dc,
-      size: 2.4,
-      sizeAttenuation: true,
-      transparent: true,
-      opacity: 0.55,
-      blending: AdditiveBlending,
-      depthWrite: false,
-    }),
-  );
-}
-
 export function mountHero3D(canvas, { reducedMotion = false } = {}) {
   let renderer;
   try {
@@ -100,31 +70,28 @@ export function mountHero3D(canvas, { reducedMotion = false } = {}) {
       roughness: 0.28,
       clearcoat: 1,
       clearcoatRoughness: 0.08,
-      iridescence: 0.35,
-      iridescenceIOR: 1.4,
-      emissive: new Color('#03DAC0'),
+            emissive: new Color('#03DAC0'),
       emissiveIntensity: 0.22,
     }),
   );
   const navy = piece(
     NAVY_PATH,
     new MeshPhysicalMaterial({
-      color: new Color('#0E2C63'),
-      metalness: 0.35,
-      roughness: 0.3,
+      // Sobre fondo oscuro la pieza marino va en blanco, igual que el logo en negativo.
+      color: new Color('#F4F7FC'),
+      metalness: 0.05,
+      roughness: 0.35,
+      emissive: new Color('#FFFFFF'),
+      emissiveIntensity: 0.18,
       clearcoat: 1,
       clearcoatRoughness: 0.1,
-      sheen: 0.35,
-      sheenColor: new Color('#5FF0DC'),
     }),
   );
 
   const logo = new Group();
   logo.add(aqua, navy);
   scene.add(logo);
-  const particles = dust(reducedMotion ? 0 : 420);
-  scene.add(particles);
-
+  
   const pointer = { x: 0, y: 0 };
   const eased = { x: 0, y: 0 };
   const onPointer = (e) => {
@@ -156,19 +123,17 @@ export function mountHero3D(canvas, { reducedMotion = false } = {}) {
     frame = requestAnimationFrame(render);
     if (!visible || document.hidden) return;
     const t = (now - start) / 1000;
-    // Entrada: las piezas llegan desde lados opuestos y encajan.
+    // Entrada: las piezas llegan desde lados opuestos y encajan. Después solo un vaivén lento.
     const intro = reducedMotion ? 1 : 1 - Math.pow(1 - Math.min(t / 1.8, 1), 4);
-    const breathe = reducedMotion ? 0 : Math.sin(t * 1.1) * 6;
-    aqua.position.set(140 * (1 - intro), 120 * (1 - intro) + 6 + breathe, 30 + 40 * (1 - intro));
-    navy.position.set(-140 * (1 - intro), -120 * (1 - intro) - 6 - breathe, -30 - 40 * (1 - intro));
+    aqua.position.set(140 * (1 - intro), 120 * (1 - intro) + 6, 30 + 40 * (1 - intro));
+    navy.position.set(-140 * (1 - intro), -120 * (1 - intro) - 6, -30 - 40 * (1 - intro));
 
     eased.x += (pointer.x - eased.x) * 0.05;
     eased.y += (pointer.y - eased.y) * 0.05;
     const drift = reducedMotion ? 0 : Math.sin(t * 0.5) * 0.12;
     logo.rotation.y = -0.38 + eased.x * 0.45 + drift + (1 - intro) * 1.4;
     logo.rotation.x = 0.12 + eased.y * 0.25;
-    logo.position.y = reducedMotion ? 0 : Math.sin(t * 0.8) * 8;
-    particles.rotation.y = t * 0.03;
+    
 
     renderer.render(scene, camera);
     if (reducedMotion && t > 0.1) cancelAnimationFrame(frame);
