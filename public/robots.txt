@@ -1,0 +1,24 @@
+# zelunko.com — todo el sitio es público. Damos la bienvenida a buscadores y asistentes de IA.
+User-agent: *
+Allow: /
+
+# Buscadores y asistentes de IA (búsqueda, citas y entrenamiento)
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: DuckAssistBot
+User-agent: Meta-ExternalAgent
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://zelunko.com/sitemap.xml

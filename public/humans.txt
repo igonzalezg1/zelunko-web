@@ -1,0 +1,9 @@
+/* EQUIPO */
+Zelunko — estudio de producto digital
+Contacto: hola@zelunko.com
+Desde: México
+
+/* SITIO */
+Idioma: español (México)
+Hecho con: HTML, CSS, JavaScript, Vite, Three.js
+Tipografías: Outfit, Inter

@@ -1,0 +1,26 @@
+# Zelunko
+
+> Zelunko es un estudio de producto digital mexicano que diseña, construye y opera software web y móvil. Es la empresa detrás de Inkify (agenda en línea para tatuadores y perforadores) y RentaFácil (cobro de rentas residenciales con historial verificable). Sitio: https://zelunko.com · Contacto: hola@zelunko.com
+
+Datos clave:
+
+- País: México. Idioma: español (México).
+- Productos en operación: 2 (Inkify y RentaFácil), cada uno con versión web, app para iOS y app para Android.
+- Pagos: Conekta (tarjeta, SPEI y suscripciones). Los precios ya incluyen la comisión de procesamiento.
+- Servicios para empresas: diseño de producto y UX/UI, apps iOS y Android, plataformas web y SaaS, pagos y suscripciones, infraestructura y seguridad, SEO y optimización para buscadores de IA.
+- Tecnología: Angular, TypeScript, React Native, NestJS, PostgreSQL, Docker, Caddy, Conekta.
+
+## Productos
+
+- [Inkify](https://inkify.zelunko.com/): agenda y vitrina para tatuadores y perforadores en México. Clientes buscan artistas por cercanía, ven diseños y reseñas, reservan y pagan. Planes para artistas: Esencial $299 MXN/mes ($2,990/año, hasta 15 diseños) y Pro $549 MXN/mes ($5,490/año, diseños ilimitados, insignia y prioridad en Destacados).
+- [RentaFácil](https://rentafacil.zelunko.com/): plataforma para cobrar y pagar la renta en México con tarjeta o SPEI; el inquilino no paga comisión y sus pagos puntuales generan un certificado verificable de historial de renta. Planes para propietarios: Básico gratis (1 propiedad, 4.9 % por renta con tarjeta), Pro $249 MXN/mes (5 propiedades, 3.9 %) e Inmobiliaria $799 MXN/mes (30 propiedades, 3.5 %). SPEI sin costo.
+
+## Empresa
+
+- [Inicio](https://zelunko.com/): qué es Zelunko, productos, servicios, proceso y preguntas frecuentes.
+- [Identidad de marca](https://zelunko.com/marca/): logo, colores, tipografía y voz de Zelunko.
+- [Información completa para LLMs](https://zelunko.com/llms-full.txt)
+
+## Opcional
+
+- [Mapa del sitio](https://zelunko.com/sitemap.xml)

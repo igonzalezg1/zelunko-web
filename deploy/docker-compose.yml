@@ -1,0 +1,24 @@
+# Web de zelunko.com. Desde la raíz del proyecto:
+#   docker compose -f deploy/docker-compose.yml up -d --build
+# Requiere que zelunko-edge ya esté arriba (crea la red `zelunko`).
+name: zelunko-web
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      zelunko:
+        aliases:
+          - zelunko-web
+
+networks:
+  zelunko:
+    external: true

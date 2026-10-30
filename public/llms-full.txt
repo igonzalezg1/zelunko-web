@@ -1,0 +1,51 @@
+# Zelunko — información completa
+
+Zelunko es un estudio de producto digital mexicano. Diseña, desarrolla y opera software web y móvil, y es la empresa dueña de dos productos en operación: Inkify y RentaFácil. Cada producto tiene su propia marca y vive en un subdominio de zelunko.com; comparten un sistema de diseño, una plataforma de pagos con Conekta y una infraestructura con HTTPS.
+
+Lema: "Software que hace fácil lo importante."
+Contacto: hola@zelunko.com
+País: México. Trabaja de forma remota con clientes de todo el país.
+
+## Inkify (https://inkify.zelunko.com/)
+
+Qué es: agenda de citas y vitrina en línea para tatuadores y perforadores en México.
+Para clientes: explorar artistas cerca de su ubicación, ver portafolios de diseños, calificaciones y reseñas, consultar servicios, reservar un horario, pagar en línea y enviar mensajes al artista.
+Para artistas: perfil público con portafolio, agenda con horarios, gestión de citas, mensajes, recordatorios y registro de tarjeta sanitaria.
+Plataformas: web, iOS y Android. Consola de administración interna.
+Precios (lo paga el artista, IVA y comisión incluidos):
+- Esencial: $299 MXN al mes o $2,990 MXN al año. Hasta 15 diseños.
+- Pro: $549 MXN al mes o $5,490 MXN al año. Diseños ilimitados, insignia Pro, prioridad en Destacados y en resultados por distancia.
+
+## RentaFácil (https://rentafacil.zelunko.com/)
+
+Qué es: plataforma de rentas residenciales en México para propietarios e inquilinos.
+Cómo funciona: 1) el propietario registra su propiedad y genera un código de acceso; 2) el inquilino se vincula con el código y paga cada mes con tarjeta (Conekta) o registra su SPEI; 3) cada pago puntual cuenta y el inquilino puede generar un certificado de historial de renta que cualquier arrendador verifica en línea.
+Para inquilinos: pagar sin comisión, recordatorios antes de la fecha de pago, historial y certificado verificable.
+Para propietarios: ver qué rentas ya se cobraron, vincular inquilinos sin papeleo, confirmar transferencias SPEI, catálogo público de propiedades con fotos y contacto.
+Plataformas: web (sitio público, portal de inquilino, portal de propietario, administración), iOS y Android.
+Precios (lo paga el propietario; el inquilino nunca paga comisión; pago anual equivale a 10 meses):
+- Básico: gratis. 1 propiedad. 4.9 % por renta cobrada con tarjeta.
+- Pro: $249 MXN al mes. 5 propiedades. 3.9 % por renta con tarjeta. Propiedades destacadas.
+- Inmobiliaria: $799 MXN al mes. 30 propiedades. 3.5 % por renta con tarjeta. Liquidaciones.
+- SPEI: siempre gratis.
+
+## Servicios de Zelunko para empresas
+
+- Diseño de producto y UX/UI: investigación, flujos, prototipos navegables y sistemas de diseño.
+- Apps para iOS y Android con React Native, publicadas en App Store y Google Play.
+- Plataformas web y SaaS con Angular y TypeScript: portales por rol, consolas de administración y sitios públicos.
+- Pagos y suscripciones con Conekta: tarjeta, SPEI y planes recurrentes.
+- Infraestructura y seguridad: Docker, HTTPS automático con Caddy, respaldos.
+- SEO técnico y optimización para buscadores de IA (datos estructurados, llms.txt, contenido citable).
+- Operación continua: monitoreo, medición y mejora.
+
+## Proceso de trabajo
+
+1. Descubrir: entender el problema con quienes lo viven y definir lo mínimo que debe funcionar.
+2. Diseñar: prototipos navegables y sistema visual propio, probados antes de programar.
+3. Construir: web, app y servidor en paralelo, con pagos e infraestructura listos para producción.
+4. Operar: lanzar, medir y mejorar con datos reales de uso.
+
+## Principios
+
+Simple primero · Precios claros (comisiones incluidas) · Seguro por defecto · Hecho para quedarse.
