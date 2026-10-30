@@ -3,3 +3,6 @@ dist
 .git
 docs
 *.md
+renders
+studio
+.render-*

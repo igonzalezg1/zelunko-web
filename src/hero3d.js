@@ -1,113 +1,35 @@
-// La Z del logo en 3D: las dos piezas del símbolo se extruyen desde el mismo vector del SVG,
-// flotan separadas y se acomodan siguiendo al cursor. Se carga después del primer pintado
-// para no frenar la página; sin WebGL o con movimiento reducido se queda el póster estático.
-import {
-  ACESFilmicToneMapping,
-  Color,
-  ExtrudeGeometry,
-  Group,
-  Mesh,
-  MeshPhysicalMaterial,
-  PerspectiveCamera,
-  PMREMGenerator,
-  Scene,
-  SRGBColorSpace,
-  WebGLRenderer,
-} from 'three';
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+// Escenas 3D en vivo de zelunko.com: la Z de vidrio aqua y base perla (src/three/zelunko3d.js).
+// - Héroe: las piezas llegan y encajan; siguen al cursor y se separan al salir del héroe con el scroll.
+// - Historia: sección fija donde el scroll arma, gira y separa la Z al ritmo del texto.
+// Solo se dibuja mientras el canvas está en pantalla. Con movimiento reducido queda una pose fija.
+import { adaptToDarkBackground, createStage, zelunkoMark } from './three/zelunko3d.js';
 
-const AQUA_PATH = 'M52 2H248a26 26 0 0 1 24 38L172 154H116L202 56H4Z';
-const NAVY_PATH = 'M222 224H26a26 26 0 0 1-24-38L102 72h56L72 170h198Z';
+const ease = (x) => 1 - Math.pow(1 - Math.min(Math.max(x, 0), 1), 4);
 
-function shapesFrom(d) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg"><path d="${d}"/></svg>`;
-  return new SVGLoader().parse(svg).paths.flatMap((p) => SVGLoader.createShapes(p));
-}
-
-function piece(d, material) {
-  const geometry = new ExtrudeGeometry(shapesFrom(d), {
-    depth: 46,
-    bevelEnabled: true,
-    bevelThickness: 7,
-    bevelSize: 5,
-    bevelSegments: 6,
-    curveSegments: 24,
-  });
-  // El SVG crece hacia abajo; se voltea y se centra en el centro del símbolo (137, 113).
-  geometry.translate(-137, -113, -23);
-  geometry.scale(1, -1, 1);
-  geometry.computeVertexNormals();
-  return new Mesh(geometry, material);
-}
-
-export function mountHero3D(canvas, { reducedMotion = false } = {}) {
-  let renderer;
+function mount(canvas, { reducedMotion, base, pose }) {
+  let stage;
   try {
-    renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    stage = createStage(canvas, { distance: 5.4 });
   } catch {
     return null;
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.outputColorSpace = SRGBColorSpace;
-  renderer.toneMapping = ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.9;
+  const z = zelunkoMark({ base });
+  stage.stage.add(z);
+  // El canvas es transparente: sin fondo que refractar, el vidrio pasa a resina para no verse lavado.
+  adaptToDarkBackground(z);
 
-  const scene = new Scene();
-  const pmrem = new PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  // Reflejos suaves: con más intensidad el aqua se lava y el marino se vuelve celeste.
-  scene.environmentIntensity = 0.55;
-
-  const camera = new PerspectiveCamera(32, 1, 1, 4000);
-  camera.position.set(0, 0, 900);
-
-  const aqua = piece(
-    AQUA_PATH,
-    new MeshPhysicalMaterial({
-      color: new Color('#03DAC0'),
-      metalness: 0.05,
-      roughness: 0.28,
-      clearcoat: 1,
-      clearcoatRoughness: 0.08,
-            emissive: new Color('#03DAC0'),
-      emissiveIntensity: 0.22,
-    }),
-  );
-  const navy = piece(
-    NAVY_PATH,
-    new MeshPhysicalMaterial({
-      // Sobre fondo oscuro la pieza marino va en blanco, igual que el logo en negativo.
-      color: new Color('#F4F7FC'),
-      metalness: 0.05,
-      roughness: 0.35,
-      emissive: new Color('#FFFFFF'),
-      emissiveIntensity: 0.18,
-      clearcoat: 1,
-      clearcoatRoughness: 0.1,
-    }),
-  );
-
-  const logo = new Group();
-  logo.add(aqua, navy);
-  scene.add(logo);
-  
   const pointer = { x: 0, y: 0 };
   const eased = { x: 0, y: 0 };
   const onPointer = (e) => {
-    pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+    pointer.x = (e.clientX / innerWidth) * 2 - 1;
+    pointer.y = (e.clientY / innerHeight) * 2 - 1;
   };
-  window.addEventListener('pointermove', onPointer, { passive: true });
+  addEventListener('pointermove', onPointer, { passive: true });
 
   const resize = () => {
-    const { clientWidth: w, clientHeight: h } = canvas;
-    if (!w || !h) return;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
+    stage.resize();
     // En pantallas angostas la Z se aleja un poco para que no se corte.
-    camera.position.z = w < 640 ? 1080 : 900;
-    camera.updateProjectionMatrix();
+    stage.camera.position.z = canvas.clientWidth < 640 ? 6.2 : 5.4;
   };
   const ro = new ResizeObserver(resize);
   ro.observe(canvas);
@@ -119,32 +41,84 @@ export function mountHero3D(canvas, { reducedMotion = false } = {}) {
 
   const start = performance.now();
   let frame = 0;
-  const render = (now) => {
-    frame = requestAnimationFrame(render);
+  const loop = (now) => {
+    frame = requestAnimationFrame(loop);
     if (!visible || document.hidden) return;
     const t = (now - start) / 1000;
-    // Entrada: las piezas llegan desde lados opuestos y encajan. Después solo un vaivén lento.
-    const intro = reducedMotion ? 1 : 1 - Math.pow(1 - Math.min(t / 1.8, 1), 4);
-    aqua.position.set(140 * (1 - intro), 120 * (1 - intro) + 6, 30 + 40 * (1 - intro));
-    navy.position.set(-140 * (1 - intro), -120 * (1 - intro) - 6, -30 - 40 * (1 - intro));
-
     eased.x += (pointer.x - eased.x) * 0.05;
     eased.y += (pointer.y - eased.y) * 0.05;
-    const drift = reducedMotion ? 0 : Math.sin(t * 0.5) * 0.12;
-    logo.rotation.y = -0.38 + eased.x * 0.45 + drift + (1 - intro) * 1.4;
-    logo.rotation.x = 0.12 + eased.y * 0.25;
-    
-
-    renderer.render(scene, camera);
+    const p = pose({ t, pointer: eased, reducedMotion });
+    z.rotation.set(p.rx, p.ry, p.rz ?? 0);
+    z.position.y = p.y ?? 0;
+    z.userData.update({ explode: p.explode });
+    stage.render();
     if (reducedMotion && t > 0.1) cancelAnimationFrame(frame);
   };
-  frame = requestAnimationFrame(render);
+  frame = requestAnimationFrame(loop);
 
   return () => {
     cancelAnimationFrame(frame);
     ro.disconnect();
     io.disconnect();
-    window.removeEventListener('pointermove', onPointer);
-    renderer.dispose();
+    removeEventListener('pointermove', onPointer);
+    stage.dispose();
   };
+}
+
+/** Avance 0–1 del scroll dentro de un elemento (0 cuando su borde superior toca el de la pantalla). */
+const scrollProgress = (el) => () => {
+  const r = el.getBoundingClientRect();
+  return Math.min(Math.max(-r.top / Math.max(r.height - innerHeight, 1), 0), 1);
+};
+
+export function mountHero3D(canvas, { reducedMotion = false } = {}) {
+  const hero = canvas.closest('.hero');
+  return mount(canvas, {
+    reducedMotion,
+    base: 'pearl',
+    pose: ({ t, pointer }) => {
+      const intro = reducedMotion ? 1 : ease(t / 1.8);
+      // Al bajar, las piezas se separan y la Z sube un poco: lo que sigue es la historia.
+      const leave = reducedMotion ? 0 : Math.min(Math.max(-hero.getBoundingClientRect().top / hero.offsetHeight, 0), 1);
+      const drift = reducedMotion ? 0 : Math.sin(t * 0.5) * 0.1;
+      return {
+        explode: (1 - intro) * 1.2 + leave * 0.5,
+        rx: 0.14 + pointer.y * 0.22 + leave * 0.3,
+        ry: -0.4 + pointer.x * 0.4 + drift + (1 - intro) * 1.3,
+        y: leave * 0.4,
+      };
+    },
+  });
+}
+
+/**
+ * Historia fija: 0–0.33 la Z gira de tres cuartos a frente; 0.33–0.66 se separan la base y la pieza aqua;
+ * 0.66–1 vuelven a encajar. Marca el paso activo en `[data-story-step]` para el texto.
+ */
+export function mountStory3D(canvas, { reducedMotion = false } = {}) {
+  const section = canvas.closest('[data-story]');
+  const progress = scrollProgress(section);
+  const steps = [...section.querySelectorAll('[data-story-step]')];
+  let current = -1;
+  return mount(canvas, {
+    reducedMotion,
+    base: 'navy',
+    pose: ({ t }) => {
+      const p = progress();
+      const step = Math.min(steps.length - 1, Math.floor(p * steps.length));
+      if (step !== current) {
+        current = step;
+        steps.forEach((el, i) => el.classList.toggle('is-active', i === step));
+      }
+      if (reducedMotion) return { explode: 0, rx: 0.12, ry: -0.35 };
+      const turn = ease(p / 0.33);
+      const split = Math.sin(Math.min(Math.max((p - 0.33) / 0.62, 0), 1) * Math.PI);
+      return {
+        explode: split * 0.7,
+        rx: 0.1 + split * 0.25,
+        ry: -0.9 * (1 - turn) - 0.3 + split * 0.6 + Math.sin(t * 0.4) * 0.05,
+        rz: split * -0.12,
+      };
+    },
+  });
 }

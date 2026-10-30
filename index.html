@@ -278,7 +278,7 @@
                 <a class="btn btn-outline-light" href="#contacto">Construye con nosotros</a>
               </div>
             </div>
-            <div class="hero-visual" data-hero-visual aria-hidden="true">
+            <div class="hero-visual" data-hero-visual data-3d aria-hidden="true">
               <svg class="hero-poster"><use href="#z-mark" /></svg>
               <canvas data-hero-canvas></canvas>
             </div>
@@ -315,8 +315,38 @@
         </div>
       </section>
 
+      <section class="story" data-story data-3d aria-labelledby="story-title">
+        <div class="story-sticky">
+          <div class="wrap story-grid">
+            <div class="story-copy">
+              <p class="overline">Cómo está hecha la Z</p>
+              <h2 id="story-title" class="section-title">Dos piezas que encajan sin tocarse.</h2>
+              <ol class="story-steps">
+                <li data-story-step class="is-active">
+                  <h3>La base</h3>
+                  <p>Infraestructura, pagos con Conekta, seguridad y un sistema de diseño. Lo que no se ve y sostiene todo.</p>
+                </li>
+                <li data-story-step>
+                  <h3>Lo que creamos encima</h3>
+                  <p>Productos con marca propia, como Inkify y RentaFácil, que resuelven un problema concreto de punta a punta.</p>
+                </li>
+                <li data-story-step>
+                  <h3>Una sola pieza</h3>
+                  <p>Cada producto nuevo nace sobre la misma base. Por eso llega antes a producción y se opera con el mismo cuidado.</p>
+                </li>
+              </ol>
+            </div>
+            <div class="story-visual" aria-hidden="true">
+              <img class="story-poster" src="/img/3d/zelunko-mark-light.webp" alt="" width="900" height="900" loading="lazy" />
+              <canvas data-story-canvas></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section alt" id="productos" aria-labelledby="products-title">
         <div class="wrap">
+          <img class="section-3d" src="/img/3d/zelunko-rings.webp" alt="" width="800" height="800" loading="lazy" data-parallax />
           <div class="section-head" data-reveal>
             <p class="overline">Productos</p>
             <h2 id="products-title" class="section-title">Dos productos, un mismo estándar.</h2>
@@ -547,7 +577,7 @@
 
       <section class="section" id="contacto" aria-labelledby="cta-title">
         <div class="wrap">
-          <div class="cta-card" data-reveal>
+          <div class="cta-card cta-3d" data-reveal>
             <div>
               <h2 id="cta-title">¿Tienes una idea que merece ser producto?</h2>
               <p>Cuéntanos qué quieres resolver. Te respondemos con una propuesta clara: alcance, tiempos y lo mínimo para lanzar.</p>

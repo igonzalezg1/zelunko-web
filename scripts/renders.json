@@ -1,0 +1,241 @@
+[
+ {
+  "out": "public/img/3d/zelunko-mark-light.webp",
+  "scene": "zelunko-mark-navy",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "bg": "F5F8FC",
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "public/img/3d/zelunko-rings.webp",
+  "scene": "zelunko-rings",
+  "size": [
+   800,
+   800
+  ],
+  "params": {}
+ },
+ {
+  "out": "public/img/3d/zelunko-field.webp",
+  "scene": "zelunko-field",
+  "size": [
+   1800,
+   700
+  ],
+  "params": {
+   "bg": "0E2C63",
+   "distance": "7"
+  }
+ },
+ {
+  "out": "renders/rentafacil/hero-loop.mp4",
+  "scene": "rentafacil-house",
+  "size": [
+   1000,
+   1000
+  ],
+  "frames": 150,
+  "fps": 30,
+  "params": {
+   "bg": "023838"
+  }
+ },
+ {
+  "out": "renders/rentafacil/house-dark.png",
+  "scene": "rentafacil-house",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "dark": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/house-light.png",
+  "scene": "rentafacil-house",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/seal-light.png",
+  "scene": "rentafacil-seal",
+  "size": [
+   800,
+   800
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/seal-dark.png",
+  "scene": "rentafacil-seal",
+  "size": [
+   800,
+   800
+  ],
+  "params": {
+   "dark": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/cubes-light.png",
+  "scene": "rentafacil-cubes",
+  "size": [
+   800,
+   800
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/cubes-dark.png",
+  "scene": "rentafacil-cubes",
+  "size": [
+   800,
+   800
+  ],
+  "params": {
+   "dark": "1"
+  }
+ },
+ {
+  "out": "renders/rentafacil/field-dark.webp",
+  "scene": "rentafacil-field",
+  "size": [
+   1800,
+   700
+  ],
+  "params": {
+   "bg": "023838",
+   "distance": "7"
+  }
+ },
+ {
+  "out": "renders/rentafacil/field-app.png",
+  "scene": "rentafacil-field",
+  "size": [
+   1170,
+   900
+  ],
+  "params": {
+   "dark": "1",
+   "distance": "9"
+  }
+ },
+ {
+  "out": "renders/inkify/hero-loop.mp4",
+  "scene": "inkify-machine",
+  "size": [
+   1000,
+   1000
+  ],
+  "frames": 150,
+  "fps": 30,
+  "params": {
+   "bg": "141416"
+  }
+ },
+ {
+  "out": "renders/inkify/machine-dark.png",
+  "scene": "inkify-machine",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "dark": "1"
+  }
+ },
+ {
+  "out": "renders/inkify/machine-light.png",
+  "scene": "inkify-machine",
+  "size": [
+   900,
+   900
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/inkify/drop-light.png",
+  "scene": "inkify-drop",
+  "size": [
+   800,
+   800
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/inkify/drop-dark.png",
+  "scene": "inkify-drop",
+  "size": [
+   800,
+   800
+  ],
+  "params": {
+   "dark": "1"
+  }
+ },
+ {
+  "out": "renders/inkify/cartridges-light.png",
+  "scene": "inkify-cartridges",
+  "size": [
+   800,
+   800
+  ],
+  "params": {
+   "shadow": "1"
+  }
+ },
+ {
+  "out": "renders/inkify/cartridges-dark.png",
+  "scene": "inkify-cartridges",
+  "size": [
+   800,
+   800
+  ],
+  "params": {
+   "dark": "1"
+  }
+ },
+ {
+  "out": "renders/inkify/field-dark.webp",
+  "scene": "inkify-field",
+  "size": [
+   1800,
+   700
+  ],
+  "params": {
+   "bg": "141416",
+   "distance": "7"
+  }
+ },
+ {
+  "out": "renders/inkify/field-app.png",
+  "scene": "inkify-field",
+  "size": [
+   1170,
+   900
+  ],
+  "params": {
+   "dark": "1",
+   "distance": "9"
+  }
+ }
+]

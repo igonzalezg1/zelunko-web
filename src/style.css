@@ -1287,3 +1287,196 @@ p {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Historia 3D fija (la Z se arma y se separa con el scroll) ---------- */
+.story {
+  position: relative;
+  height: 300vh;
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+}
+.story-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+}
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+}
+.story-steps {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  counter-reset: story;
+}
+.story-steps li {
+  counter-increment: story;
+  padding: 16px 0 16px 56px;
+  position: relative;
+  border-top: 1px solid var(--border);
+  opacity: 0.38;
+  transition: opacity 0.5s var(--ease);
+}
+.story-steps li::before {
+  content: counter(story, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 18px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--brand);
+}
+.story-steps li.is-active {
+  opacity: 1;
+}
+.story-steps h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+}
+.story-steps p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 460px;
+}
+.story-visual {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+}
+.story-visual canvas,
+.story-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.story-visual canvas {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease);
+}
+.story.is-3d canvas {
+  opacity: 1;
+}
+.story-poster {
+  object-fit: contain;
+  transition: opacity 0.6s var(--ease);
+}
+.story.is-3d .story-poster {
+  opacity: 0;
+}
+@media (max-width: 860px) {
+  .story {
+    height: auto;
+  }
+  .story-sticky {
+    position: static;
+    height: auto;
+    padding: 72px 0;
+  }
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+  .story-visual {
+    order: -1;
+    max-width: 360px;
+    justify-self: center;
+  }
+  .story-steps li {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story {
+    height: auto;
+  }
+  .story-sticky {
+    position: static;
+    height: auto;
+    padding: 112px 0;
+  }
+  .story-steps li {
+    opacity: 1;
+  }
+}
+
+/* ---------- Piezas 3D pre-renderizadas en secciones ---------- */
+#productos .wrap {
+  position: relative;
+}
+.section-3d {
+  position: absolute;
+  top: -56px;
+  right: 0;
+  width: 280px;
+  height: auto;
+  pointer-events: none;
+  translate: 0 var(--parallax, 0px);
+}
+@media (max-width: 860px) {
+  .section-3d {
+    display: none;
+  }
+}
+/* CTA con el fondo de piezas de vidrio: texto y botones a la izquierda, piezas a la derecha. */
+.cta-3d {
+  grid-template-columns: minmax(0, 1fr);
+  padding-right: 46%;
+  background:
+    linear-gradient(90deg, var(--brand) 42%, rgb(14 44 99 / 0) 70%),
+    var(--brand) url('/img/3d/zelunko-field.webp') 85% center / auto 120% no-repeat;
+}
+@media (max-width: 860px) {
+  .cta-3d {
+    padding: 36px 24px 180px;
+    background:
+      linear-gradient(180deg, var(--brand) 60%, rgb(14 44 99 / 0) 100%),
+      var(--brand) url('/img/3d/zelunko-field.webp') center bottom / 220% auto no-repeat;
+  }
+}
+
+/* ---------- Marca: objetos 3D ---------- */
+.objects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.objects figure {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.objects img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.objects figcaption {
+  padding: 16px 20px 20px;
+  color: var(--muted);
+  font-size: 15px;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+.objects figcaption strong {
+  display: block;
+  color: var(--text);
+  font-size: 16px;
+}
+@media (max-width: 860px) {
+  .objects {
+    grid-template-columns: 1fr;
+  }
+}

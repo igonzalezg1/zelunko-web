@@ -73,24 +73,44 @@ counters.forEach((el) => counterIo.observe(el));
 // Año del pie de página.
 document.querySelectorAll('[data-year]').forEach((el) => (el.textContent = String(new Date().getFullYear())));
 
-// Z en 3D: después del primer pintado y solo si hay WebGL.
-const canvas = document.querySelector('[data-hero-canvas]');
-if (canvas) {
-  const hasWebGL = (() => {
-    try {
-      return !!document.createElement('canvas').getContext('webgl2');
-    } catch {
-      return false;
-    }
-  })();
-  if (hasWebGL) {
-    const load = () =>
-      import('./hero3d.js').then(({ mountHero3D }) => {
-        if (mountHero3D(canvas, { reducedMotion })) {
-          requestAnimationFrame(() => canvas.closest('[data-hero-visual]')?.classList.add('is-3d'));
-        }
-      });
-    if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 1200 });
-    else setTimeout(load, 300);
+// Escenas 3D (héroe e historia): después del primer pintado y solo si hay WebGL.
+const hasWebGL = (() => {
+  try {
+    return !!document.createElement('canvas').getContext('webgl2');
+  } catch {
+    return false;
   }
+})();
+const scenes = [
+  ['[data-hero-canvas]', 'mountHero3D'],
+  ['[data-story-canvas]', 'mountStory3D'],
+].filter(([sel]) => document.querySelector(sel));
+if (hasWebGL && scenes.length) {
+  const load = () =>
+    import('./hero3d.js').then((mod) => {
+      for (const [sel, fn] of scenes) {
+        const canvas = document.querySelector(sel);
+        if (mod[fn](canvas, { reducedMotion })) {
+          requestAnimationFrame(() => canvas.closest('[data-3d]')?.classList.add('is-3d'));
+        }
+      }
+    });
+  if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 1200 });
+  else setTimeout(load, 300);
+}
+
+// Parallax leve de las piezas 3D pre-renderizadas (solo transform, máx. ±40 px).
+const parallax = [...document.querySelectorAll('[data-parallax]')];
+if (parallax.length && !reducedMotion) {
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    for (const el of parallax) {
+      const r = el.getBoundingClientRect();
+      const k = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      el.style.setProperty('--parallax', `${Math.max(-1, Math.min(1, k)) * -40}px`);
+    }
+  };
+  addEventListener('scroll', () => ticking || ((ticking = true), requestAnimationFrame(update)), { passive: true });
+  update();
 }

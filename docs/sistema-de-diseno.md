@@ -12,7 +12,7 @@ Prohibido (son las señales más obvias de diseño genérico):
 - Texto con degradado. Si hace falta énfasis, una palabra en el color de acento, sólido.
 - Manchas de luz, neón, `box-shadow` de color tipo "glow", grano y auroras de fondo.
 - Tarjetas flotando sin parar, chips decorativos alrededor del héroe y glassmorphism.
-- Inclinación 3D (tilt) en tarjetas de contenido. Se permite solo en **un** elemento del héroe.
+- Inclinación 3D (tilt) en tarjetas de contenido. El 3D va en objetos de marca (§ 7), no en la UI.
 - Rejillas repetidas de "ícono en cuadrito + título + texto" sección tras sección.
 - Emojis, cifras inventadas, frases vacías ("de vanguardia", "soluciones integrales").
 - Más de una animación continua por pantalla.
@@ -113,6 +113,27 @@ nada de flotados infinitos ni marquees; las salidas son más rápidas que las en
 `AccessibilityInfo.isReduceMotionEnabled`) todo aparece directo sin desplazamiento.
 En React Native usar `Animated` con `useNativeDriver: true` (no agregar librerías nativas nuevas).
 
-## 7. Voz
+## 7. 3D: objetos de marca
+
+El 3D no decora la interfaz: **cada marca tiene objetos físicos** (su logo y su mundo) hechos con
+los mismos materiales y la misma luz de estudio, al estilo de los sitios de producto premium
+(turnoev.com, sisa.ai). Fuente única: `Zelunko/src/three/zelunko3d.js`.
+
+- **Materiales**: vidrio esmerilado de color (protagonista), satinado y cromo. Sobre fondo
+  transparente u oscuro el vidrio pasa a "resina" (`adaptToDarkBackground`) para no verse negro.
+- **Objetos**: Zelunko = la Z (aqua + base perla en oscuro / marino en claro), anillos.
+  RentaFácil = la casa del logo, sello de certificado, cubos de pago. Inkify = la máquina del logo,
+  gota de tinta, cartuchos. Cada marca tiene además un **fondo** (`*-field`) con hueco al centro.
+- **Dónde**: héroe (Zelunko en vivo con three.js; productos con video en bucle pre-renderizado),
+  una pieza por sección como acento (con parallax de ±40 px), fondo en el CTA final y en
+  encabezados de app; en app: acceso, inicio, estados vacíos y confirmaciones.
+- **Render**: `node scripts/render3d.mjs` (Chrome con GPU) genera PNG/WebP y MP4 en
+  `Zelunko/renders/<producto>/` y `Zelunko/public/img/3d/`. Los MP4 llevan el color del héroe
+  dentro; el borde se funde con `mask-image` radial. Nunca usar video con alfa.
+- **Reglas**: máximo un objeto 3D por sección, un solo elemento animado continuo por pantalla
+  (el objeto 3D o el video), nada de 3D en tarjetas o botones, y con *reducir movimiento* se
+  muestra el póster fijo.
+
+## 8. Voz
 
 Directa y cercana, frases cortas, verbo al frente, cifras reales. Igual en los tres productos.
