@@ -13,8 +13,8 @@ Para clientes: explorar artistas cerca de su ubicación, ver portafolios de dise
 Para artistas: perfil público con portafolio, agenda con horarios, gestión de citas, mensajes, recordatorios y registro de tarjeta sanitaria.
 Plataformas: web, iOS y Android. Consola de administración interna.
 Precios (lo paga el artista, IVA y comisión incluidos):
-- Esencial: $299 MXN al mes o $2,990 MXN al año. Hasta 15 diseños.
-- Pro: $549 MXN al mes o $5,490 MXN al año. Diseños ilimitados, insignia Pro, prioridad en Destacados y en resultados por distancia.
+- Esencial: $249 MXN al mes o $2,490 MXN al año. Hasta 15 diseños.
+- Pro: $449 MXN al mes o $4,490 MXN al año. Diseños ilimitados, insignia Pro, prioridad en Destacados y en resultados por distancia.
 
 ## RentaFácil (https://rentafacil.zelunko.com/)
 
@@ -25,8 +25,8 @@ Para propietarios: ver qué rentas ya se cobraron, vincular inquilinos sin papel
 Plataformas: web (sitio público, portal de inquilino, portal de propietario, administración), iOS y Android.
 Precios (lo paga el propietario; el inquilino nunca paga comisión; pago anual equivale a 10 meses):
 - Básico: gratis. 1 propiedad. 4.9 % por renta cobrada con tarjeta.
-- Pro: $249 MXN al mes. 5 propiedades. 3.9 % por renta con tarjeta. Propiedades destacadas.
-- Inmobiliaria: $799 MXN al mes. 30 propiedades. 3.5 % por renta con tarjeta. Liquidaciones.
+- Pro: $199 MXN al mes. 5 propiedades. 3.9 % por renta con tarjeta. Propiedades destacadas.
+- Inmobiliaria: $599 MXN al mes. 30 propiedades. 3.5 % por renta con tarjeta. Liquidaciones.
 - SPEI: siempre gratis.
 
 ## Servicios de Zelunko para empresas

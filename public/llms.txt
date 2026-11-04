@@ -12,8 +12,8 @@ Datos clave:
 
 ## Productos
 
-- [Inkify](https://inkify.zelunko.com/): agenda y vitrina para tatuadores y perforadores en México. Clientes buscan artistas por cercanía, ven diseños y reseñas, reservan y pagan. Planes para artistas: Esencial $299 MXN/mes ($2,990/año, hasta 15 diseños) y Pro $549 MXN/mes ($5,490/año, diseños ilimitados, insignia y prioridad en Destacados).
-- [RentaFácil](https://rentafacil.zelunko.com/): plataforma para cobrar y pagar la renta en México con tarjeta o SPEI; el inquilino no paga comisión y sus pagos puntuales generan un certificado verificable de historial de renta. Planes para propietarios: Básico gratis (1 propiedad, 4.9 % por renta con tarjeta), Pro $249 MXN/mes (5 propiedades, 3.9 %) e Inmobiliaria $799 MXN/mes (30 propiedades, 3.5 %). SPEI sin costo.
+- [Inkify](https://inkify.zelunko.com/): agenda y vitrina para tatuadores y perforadores en México. Clientes buscan artistas por cercanía, ven diseños y reseñas, reservan y pagan. Planes para artistas: Esencial $249 MXN/mes ($2,490/año, hasta 15 diseños) y Pro $449 MXN/mes ($4,490/año, diseños ilimitados, insignia y prioridad en Destacados).
+- [RentaFácil](https://rentafacil.zelunko.com/): plataforma para cobrar y pagar la renta en México con tarjeta o SPEI; el inquilino no paga comisión y sus pagos puntuales generan un certificado verificable de historial de renta. Planes para propietarios: Básico gratis (1 propiedad, 4.9 % por renta con tarjeta), Pro $199 MXN/mes (5 propiedades, 3.9 %) e Inmobiliaria $599 MXN/mes (30 propiedades, 3.5 %). SPEI sin costo.
 
 ## Empresa
 
